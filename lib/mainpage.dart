@@ -43,13 +43,16 @@ class _MainPageState extends State<MainPage> {
     try{
       CoinData coinData = new CoinData();
       String getResponseBody = await coinData.conversionUrl(coinValue);
-      double valueBTC = jsonDecode(getResponseBody)['rates']['BTC'];
-      double valueETH = jsonDecode(getResponseBody)['rates']['ETH'];
-      double valueLTC = jsonDecode(getResponseBody)['rates']['LTC'];
+      String valueBTC = jsonDecode(getResponseBody)[0]['price'];
+      double valueBTCDouble = double.parse(valueBTC);
+      String valueETH = jsonDecode(getResponseBody)[1]['price'];
+      double valueETHDouble = double.parse(valueETH);
+      String valueLTC = jsonDecode(getResponseBody)[2]['price'];
+      double valueLTCDouble = double.parse(valueLTC);
       setState(() {
-        btcValue = valueBTC.toInt();
-        ethValue = valueETH.toInt();
-        ltcValue = valueLTC.toInt();
+        btcValue = valueBTCDouble.toInt();
+        ethValue = valueETHDouble.toInt();
+        ltcValue = valueLTCDouble.toInt();
       });
     }
     catch(e)
